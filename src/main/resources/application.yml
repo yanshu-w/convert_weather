@@ -1,0 +1,5 @@
+# 日志配置
+logging:
+  level:
+    com.spay: debug
+    org.springframework: warn
