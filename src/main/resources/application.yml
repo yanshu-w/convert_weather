@@ -5,13 +5,20 @@ logging:
     org.springframework: warn
 server:
   port: 5151
-
 mqtt:
   broker: tcp://broker.emqx.io:1883
   username: emqx
   password: public
-  publish_clientId: publish_client
-  subscribe_clientId: subscribe_client
-  topic: mqtt/test
+  publish_clientId: cwea_wy_publish_id
+  subscribe_clientId: cwea_wy_subscribe_id
+  publish_topic: mqtt/cwea_wy_publish_topic
+  subscribe_topic: mqtt/cwea_wy_subscribe_topic
 # ict.xsjhwy.com，端口1883
 # 账号xsjhwy密码xsjhwy123456*
+
+caiyun:
+  token: pjgwFxZMzaqWSEV6
+  url: https://api.caiyunapp.com
+  version: v2.6
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
