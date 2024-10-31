@@ -3,3 +3,15 @@ logging:
   level:
     com.spay: debug
     org.springframework: warn
+server:
+  port: 5151
+
+mqtt:
+  broker: tcp://broker.emqx.io:1883
+  username: emqx
+  password: public
+  publish_clientId: publish_client
+  subscribe_clientId: subscribe_client
+  topic: mqtt/test
+# ict.xsjhwy.com，端口1883
+# 账号xsjhwy密码xsjhwy123456*
