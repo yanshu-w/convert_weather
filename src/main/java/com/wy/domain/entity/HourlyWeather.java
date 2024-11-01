@@ -17,7 +17,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("hourly_weather")
 public class HourlyWeather {
     /**
      * 主键

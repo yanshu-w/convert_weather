@@ -17,7 +17,6 @@ import java.util.Date;
 @Data // 自动生成 getter、setter、toString、equals 和 hashCode 方法
 @AllArgsConstructor // 全参构造方法
 @NoArgsConstructor // 无参构造方法
-@TableName("weather_config") // 指定数据库表名
 public class WeatherConfig {
 
     /**

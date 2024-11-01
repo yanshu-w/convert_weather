@@ -15,7 +15,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("weather_alert")
 public class WeatherAlert {
 
     /**
