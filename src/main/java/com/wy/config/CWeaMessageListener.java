@@ -3,7 +3,6 @@ package com.wy.config;
 import com.wy.domain.vo.MqttParam;
 import com.wy.server.MqttPublishServer;
 import com.wy.server.WeatherServer;
-import com.wy.server.WeatherServerOld;
 import com.wy.utils.JsonUtil;
 import com.wy.utils.PrintErrorUtil;
 import lombok.extern.slf4j.Slf4j;

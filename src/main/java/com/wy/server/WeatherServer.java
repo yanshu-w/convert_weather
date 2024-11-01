@@ -9,8 +9,6 @@ import com.wy.domain.entity.RealtimeWeather;
 import com.wy.domain.entity.WeatherConfig;
 import com.wy.domain.vo.MqttParam;
 import com.wy.service.IApiConfigService;
-import com.wy.service.IRealtimeWeatherService;
-import com.wy.service.IWeatherConfigService;
 import com.wy.utils.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
