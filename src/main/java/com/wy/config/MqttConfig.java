@@ -41,6 +41,8 @@ public class MqttConfig {
     @Bean(name = "publishMqttClient")
     public MqttClient publishMqttClient() throws MqttException {
 
+
+        //将消费客户端改成多个，通过监听获取发布的客户端信息
         MqttClient client = getMqttClient(publishClientId);
 
         log.info("Message published");

@@ -6,9 +6,9 @@ logging:
 server:
   port: 5151
 mqtt:
-  broker: tcp://broker.emqx.io:1883
-  username: emqx
-  password: public
+  broker: tcp://ict.xsjhwy.com:1883
+  username: xsjhwy
+  password: xsjhwy123456*
   publish_clientId: cwea_wy_publish_id
   subscribe_clientId: cwea_wy_subscribe_id
   publish_topic: mqtt/cwea_wy_publish_topic

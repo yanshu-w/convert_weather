@@ -1,19 +1,18 @@
 package com.wy.config;
 
-import cn.hutool.json.JSONUtil;
-import com.wy.common.exception.ServiceException;
 import com.wy.domain.vo.MqttParam;
 import com.wy.server.MqttPublishServer;
 import com.wy.server.WeatherServer;
+import com.wy.server.WeatherServerOld;
 import com.wy.utils.JsonUtil;
 import com.wy.utils.PrintErrorUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -44,10 +43,15 @@ public class CWeaMessageListener implements IMqttMessageListener {
             return;
         }
 
+        //将param存入队列 以此执行
+
         //执行查询天气 入库 发布消息
         try {
-            String weather = weatherServer.getWeather(mqttParam);
-            mqttPublishServer.sendMessage(weather);
+            //将返回值改成数组 发送多次
+            List<String> weatherList = weatherServer.getWeather(mqttParam);
+            for (String weather : weatherList) {
+                mqttPublishServer.sendMessage(weather);
+            }
         } catch (Exception e) {
             log.error(PrintErrorUtil.print(e));
         }
