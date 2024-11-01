@@ -1,6 +1,7 @@
 package com.wy.server;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
  * 发布消息服务
  */
 @Component
+@Slf4j
 public class MqttPublishServer {
 
     @Resource(name = "publishMqttClient")
@@ -26,6 +28,7 @@ public class MqttPublishServer {
         MqttMessage message = new MqttMessage(content.getBytes());
         // 发布消息
         mqttClient.publish(topic, message);
+        log.info("publish success");
     }
 
 

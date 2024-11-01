@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     /**
      * 拦截未知的运行时异常
      */
-    @ExceptionHandler(RuntimeException.class)
+//    @ExceptionHandler(RuntimeException.class)
     public AjaxResult handleRuntimeException(RuntimeException e, HttpServletRequest request)
     {
         String requestURI = request.getRequestURI();
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     /**
      * 系统异常
      */
-    @ExceptionHandler(Exception.class)
+//    @ExceptionHandler(Exception.class)
     public AjaxResult handleException(Exception e, HttpServletRequest request)
     {
         String requestURI = request.getRequestURI();

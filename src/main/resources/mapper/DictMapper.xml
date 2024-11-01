@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wy.mapper.DictMapper">
+
+
+    <select id="getAirPollutionDict" resultType="com.wy.domain.dict.AirPollutionDict">
+        select id, aqi_desc
+        from air_pollution_dict
+    </select>
+
+    <select id="getCarWashingDict" resultType="com.wy.domain.dict.CarWashingDict">
+        select  id, description
+        from carWashing_dict
+    </select>
+
+    <select id="getColdRiskDict" resultType="com.wy.domain.dict.ColdRiskDict">
+        select  id, description
+        from coldRisk_dict
+    </select>
+
+    <select id="getComfortDict" resultType="com.wy.domain.dict.ComfortDict">
+        select  id, description
+        from comfort_dict
+    </select>
+
+    <select id="getDressingDict" resultType="com.wy.domain.dict.DressingDict">
+        select  id, description
+        from dressing_dict
+    </select>
+
+    <select id="getHttpStatusCodeDict" resultType="com.wy.domain.dict.HttpStatusCodeDict">
+        select  code, message
+        from http_status_code_dict
+    </select>
+
+    <select id="getPrecipitationConditionDict" resultType="com.wy.domain.dict.PrecipitationConditionDict">
+        select id, precipitation_type, min_precipitation, max_precipitation, min_intensity, max_intensity, condition_description
+        from precipitation_condition_dict
+    </select>
+
+    <select id="getUltravioletDailyDict" resultType="com.wy.domain.dict.UltravioletDailyDict">
+        select id, level_desc
+        from ultraviolet_realtime_dict
+    </select>
+
+    <select id="getUltravioletRealtimeDict" resultType="com.wy.domain.dict.UltravioletRealtimeDict">
+        select id, level_desc
+        from ultraviolet_daily_dict
+    </select>
+
+    <select id="getWeatherConditionDict" resultType="com.wy.domain.dict.WeatherConditionDict">
+        select id, condition_name, condition_code, description
+        from weather_condition_dict
+    </select>
+
+    <select id="getWindDirectionDict" resultType="com.wy.domain.dict.WindDirectionDict">
+        select id, direction_name, abbreviation, angle, min_angle, max_angle
+        from wind_direction_dict
+    </select>
+
+    <select id="getWindLevelDict" resultType="com.wy.domain.dict.WindLevelDict">
+        select id, min_speed, max_speed, min_intensity, max_intensity, level_description
+        from wind_level_dict
+    </select>
+
+</mapper>

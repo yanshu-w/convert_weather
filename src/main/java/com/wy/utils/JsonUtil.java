@@ -29,7 +29,7 @@ public class JsonUtil {
             return MAPPER.readValue(jsonString, mapType);
         } catch (JsonProcessingException e) {
 //            throw new RuntimeException(e);
-            log.error("json to map fail");
+            log.error("json to map fail:"+e.getMessage());
         }
         return null;
 
@@ -41,7 +41,7 @@ public class JsonUtil {
             return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(object);
         } catch (JsonProcessingException e) {
 //            throw new RuntimeException(e);
-            log.error("object to json fail");
+            log.error("object to json fail:"+e.getMessage());
         }
         return null;
     }
@@ -52,7 +52,7 @@ public class JsonUtil {
             return MAPPER.readValue(jsonString, tClass);
         } catch (JsonProcessingException e) {
 //            throw new RuntimeException(e);
-            log.error("json to object fail");
+            log.error("json to object fail:"+e.getMessage());
         }
         return null;
     }

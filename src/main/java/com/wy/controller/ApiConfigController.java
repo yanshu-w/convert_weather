@@ -1,6 +1,7 @@
 package com.wy.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import com.wy.common.constant.HttpMsg;
 import com.wy.common.core.AjaxResult;
 import com.wy.service.IApiConfigService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,7 @@ public class ApiConfigController {
      */
     @PostMapping("/createToken")
     public AjaxResult createToken() {
-
-        return AjaxResult.error();
+        return AjaxResult.success(HttpMsg.CREATE, apiConfigService.createOne());
     }
 
     /**

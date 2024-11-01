@@ -1,14 +1,17 @@
 package com.wy.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wy.domain.result.realtime.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 实况天气信息表的实体类
@@ -189,4 +192,74 @@ public class RealtimeWeather {
      * 创建时间
      */
     private Date createTime;
+
+    @TableField(exist = false)
+    private Wind wind;
+
+    @TableField(exist = false)
+    private Precipitation precipitation;
+
+    @TableField(exist = false)
+    private AirQuality air_quality;
+
+    @TableField(exist = false)
+    private LifeIndex life_index;
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
+        this.windSpeed = wind.getSpeed();
+        this.windDirection = wind.getDirection();
+    }
+
+    public void setPrecipitation(Precipitation precipitation) {
+        this.precipitation = precipitation;
+        Local local = precipitation.getLocal();
+        if (!Objects.isNull(local)) {
+            this.precipitationLocalStatus = local.getStatus();
+            this.precipitationLocalDatasource = local.getDatasource();
+            this.precipitationLocalIntensity = local.getIntensity();
+        }
+        Nearest nearest = precipitation.getNearest();
+        if (!Objects.isNull(nearest)) {
+            this.precipitationNearestStatus = nearest.getStatus();
+            this.precipitationNearestDistance = nearest.getDistance();
+            this.precipitationNearestIntensity = nearest.getIntensity();
+        }
+    }
+
+    public void setAir_quality(AirQuality air_quality) {
+        this.air_quality = air_quality;
+        this.airQualityPm25 = air_quality.getPm25();
+        this.airQualityPm10 = air_quality.getPm10();
+        this.airQualityO3 = air_quality.getO3();
+        this.airQualitySo2 = air_quality.getSo2();
+        this.airQualityNo2 = air_quality.getNo2();
+        this.airQualityCo = air_quality.getCo();
+
+        Aqi aqi = air_quality.getAqi();
+        if (!Objects.isNull(aqi)) {
+            this.airQualityAqiChn = aqi.getChn();
+            this.airQualityAqiUsa = aqi.getUsa();
+        }
+
+        Description description = air_quality.getDescription();
+        if (!Objects.isNull(description)) {
+            this.airQualityDescriptionChn = description.getChn();
+            this.airQualityDescriptionUsa = description.getUsa();
+        }
+    }
+
+    public void setLife_index(LifeIndex life_index) {
+        this.life_index = life_index;
+        Ultraviolet ultraviolet = life_index.getUltraviolet();
+        if (!Objects.isNull(ultraviolet)) {
+            this.lifeIndexUltravioletIndex = ultraviolet.getIndex();
+            this.lifeIndexUltravioletDesc = ultraviolet.getDesc();
+        }
+        Comfort comfort = life_index.getComfort();
+        if (!Objects.isNull(comfort)) {
+            this.lifeIndexComfortIndex = comfort.getIndex();
+            this.lifeIndexComfortDesc = comfort.getDesc();
+        }
+    }
 }

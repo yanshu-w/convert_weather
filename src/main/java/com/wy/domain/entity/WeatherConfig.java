@@ -1,6 +1,7 @@
 package com.wy.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -89,4 +90,14 @@ public class WeatherConfig {
      * 创建时间
      */
     private Date createTime;
+
+
+    @TableField(exist = false)
+    private BigDecimal[] location;
+
+    public void setLocation(BigDecimal[] location) {
+        this.location = location;
+        this.latitude = location[0];
+        this.longitude = location[1];
+    }
 }

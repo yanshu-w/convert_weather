@@ -4,4 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wy.mapper.WeatherConfigMapper">
 
+    <select id="getNearFuture" resultType="com.wy.domain.entity.WeatherConfig">
+        select id,
+               status,
+               api_version,
+               api_status,
+               lang,
+               unit,
+               tzshift,
+               timezone,
+               server_time,
+               latitude,
+               longitude,
+               type,
+               result_id,
+               create_time,
+               (6371 * acos(
+                               cos(radians(#{param.lat})) * cos(radians(latitude)) *
+                               cos(radians(longitude) - radians(#{param.lon})) +
+                               sin(radians(#{param.lat})) * sin(radians(latitude))
+                   )) AS distance
+        from weather_config
+        WHERE type = #{param.type}
+        HAVING 10 > distance
+        order by distance, create_time desc
+        limit 1
+    </select>
+
+<!--    create_time >= NOW() - INTERVAL 120 SECOND-->
+
 </mapper>

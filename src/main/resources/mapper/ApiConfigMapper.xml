@@ -4,4 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wy.mapper.ApiConfigMapper">
 
+    <update id="minusTimeByToken">
+
+        update api_config
+        set api_time = api_time - 1
+        where api_token = #{token}
+
+    </update>
+
+    <select id="checkToken" resultType="java.lang.Integer">
+
+        select api_time
+        from api_config
+        where api_token = #{token}
+          and expire = 0
+        limit 1
+    </select>
+
 </mapper>

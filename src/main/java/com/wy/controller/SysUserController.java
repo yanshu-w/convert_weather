@@ -1,6 +1,7 @@
 package com.wy.controller;
 
 
+import com.wy.common.constant.HttpMsg;
 import com.wy.common.core.AjaxResult;
 import com.wy.domain.dto.LoginParam;
 import com.wy.service.ISysUserService;
@@ -23,7 +24,7 @@ public class SysUserController {
 
         String token = sysUserService.getSysUserPwd(loginParam);
 
-        return AjaxResult.success("登录成功", token);
+        return AjaxResult.success(HttpMsg.LOGIN, token);
     }
 
 }
