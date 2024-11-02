@@ -43,5 +43,24 @@ public class MqttParam {
      */
     private String lon;
 
+    /**
+     * 通知主题
+     */
+    private String noticeTopic;
+
+    /**
+     * 通知URL
+     */
+    private String broker;
+
+    /**
+     * 账号
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
 
 }

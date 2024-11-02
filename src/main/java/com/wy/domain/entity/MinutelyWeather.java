@@ -2,7 +2,6 @@ package com.wy.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import java.util.Date;
 @Data // 自动生成 getter、setter、toString、equals 和 hashCode 方法
 @AllArgsConstructor // 全参构造方法
 @NoArgsConstructor // 无参构造方法
-public class MinuteWeather {
+public class MinutelyWeather {
 
     /**
      * 主键

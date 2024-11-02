@@ -5,6 +5,7 @@ import com.wy.server.MqttPublishServer;
 import com.wy.server.WeatherServer;
 import com.wy.utils.JsonUtil;
 import com.wy.utils.PrintErrorUtil;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -22,14 +23,7 @@ import java.util.Objects;
 @Component
 public class CWeaMessageListener implements IMqttMessageListener {
 
-
-    @Resource
-    private MqttPublishServer mqttPublishServer;
-
-    @Resource
-    private WeatherServer weatherServer;
-
-
+    @SneakyThrows
     @Override
     public void messageArrived(String topic, MqttMessage message) {
         String msg = new String(message.getPayload());
@@ -41,20 +35,7 @@ public class CWeaMessageListener implements IMqttMessageListener {
             log.error("未接收到消息");
             return;
         }
-
-        //将param存入队列 以此执行
-
-        //执行查询天气 入库 发布消息
-        try {
-            //将返回值改成数组 发送多次
-            List<String> weatherList = weatherServer.getWeather(mqttParam);
-            for (String weather : weatherList) {
-                mqttPublishServer.sendMessage(weather);
-            }
-        } catch (Exception e) {
-            log.error(PrintErrorUtil.print(e));
-        }
-
-
+        //将param存入队列 依次执行
+        MqttClientCreator.ParamQueue.add(mqttParam);
     }
 }

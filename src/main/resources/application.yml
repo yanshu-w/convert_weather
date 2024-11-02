@@ -9,12 +9,12 @@ mqtt:
   broker: tcp://ict.xsjhwy.com:1883
   username: xsjhwy
   password: xsjhwy123456*
-  publish_clientId: cwea_wy_publish_id
+  #publish_clientId: cwea_wy_publish_id
   subscribe_clientId: cwea_wy_subscribe_id
-  publish_topic: mqtt/cwea_wy_publish_topic
+  #publish_topic: mqtt/cwea_wy_publish_topic
   subscribe_topic: mqtt/cwea_wy_subscribe_topic
-# ict.xsjhwy.com，端口1883
-# 账号xsjhwy密码xsjhwy123456*
+  #ict.xsjhwy.com，端口1883
+  #账号xsjhwy密码xsjhwy123456*
 
 caiyun:
   token: pjgwFxZMzaqWSEV6

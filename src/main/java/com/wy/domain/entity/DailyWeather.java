@@ -3,11 +3,14 @@ package com.wy.domain.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wy.domain.result.daily.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 天级天气信息表的实体类
@@ -36,362 +39,362 @@ public class DailyWeather {
     /**
      * 日期
      */
-    private Date astroDate;
+    private String astroDate;
 
     /**
      * 日出时间
      */
-    private Date sunriseTime;
+    private String sunriseTime;
 
     /**
      * 日落时间
      */
-    private Date sunsetTime;
+    private String sunsetTime;
 
     /**
      * 白天降水日期
      */
-    private Date precipitation08h20hDate;
+    private String precipitation08h20hDate;
 
     /**
      * 白天最大降水量
      */
-    private Double precipitation08h20hMax;
+    private BigDecimal precipitation08h20hMax;
 
     /**
      * 白天最小降水量
      */
-    private Double precipitation08h20hMin;
+    private BigDecimal precipitation08h20hMin;
 
     /**
      * 白天平均降水量
      */
-    private Double precipitation08h20hAvg;
+    private BigDecimal precipitation08h20hAvg;
 
     /**
      * 白天降水概率
      */
-    private Double precipitation08h20hProbability;
+    private BigDecimal precipitation08h20hProbability;
 
     /**
      * 夜晚降水日期
      */
-    private Date precipitation20h32hDate;
+    private String precipitation20h32hDate;
 
     /**
      * 夜晚最大降水量
      */
-    private Double precipitation20h32hMax;
+    private BigDecimal precipitation20h32hMax;
 
     /**
      * 夜晚最小降水量
      */
-    private Double precipitation20h32hMin;
+    private BigDecimal precipitation20h32hMin;
 
     /**
      * 夜晚平均降水量
      */
-    private Double precipitation20h32hAvg;
+    private BigDecimal precipitation20h32hAvg;
 
     /**
      * 夜晚降水概率
      */
-    private Double precipitation20h32hProbability;
+    private BigDecimal precipitation20h32hProbability;
 
     /**
      * 全天降水日期
      */
-    private Date precipitationDate;
+    private String precipitationDate;
 
     /**
      * 全天最大降水量
      */
-    private Double precipitationMax;
+    private BigDecimal precipitationMax;
 
     /**
      * 全天最小降水量
      */
-    private Double precipitationMin;
+    private BigDecimal precipitationMin;
 
     /**
      * 全天平均降水量
      */
-    private Double precipitationAvg;
+    private BigDecimal precipitationAvg;
 
     /**
      * 全天降水概率
      */
-    private Double precipitationProbability;
+    private BigDecimal precipitationProbability;
 
     /**
      * 气温日期
      */
-    private Date temperatureDate;
+    private String temperatureDate;
 
     /**
      * 全天最高气温
      */
-    private Double temperatureMax;
+    private BigDecimal temperatureMax;
 
     /**
      * 全天最低气温
      */
-    private Double temperatureMin;
+    private BigDecimal temperatureMin;
 
     /**
      * 全天平均气温
      */
-    private Double temperatureAvg;
+    private BigDecimal temperatureAvg;
 
     /**
      * 白天气温日期
      */
-    private Date temperature08h20hDate;
+    private String temperature08h20hDate;
 
     /**
      * 白天最高气温
      */
-    private Double temperature08h20hMax;
+    private BigDecimal temperature08h20hMax;
 
     /**
      * 白天最低气温
      */
-    private Double temperature08h20hMin;
+    private BigDecimal temperature08h20hMin;
 
     /**
      * 白天平均气温
      */
-    private Double temperature08h20hAvg;
+    private BigDecimal temperature08h20hAvg;
 
     /**
      * 夜晚气温日期
      */
-    private Date temperature20h32hDate;
+    private String temperature20h32hDate;
 
     /**
      * 夜晚最高气温
      */
-    private Double temperature20h32hMax;
+    private BigDecimal temperature20h32hMax;
 
     /**
      * 夜晚最低气温
      */
-    private Double temperature20h32hMin;
+    private BigDecimal temperature20h32hMin;
 
     /**
      * 夜晚平均气温
      */
-    private Double temperature20h32hAvg;
+    private BigDecimal temperature20h32hAvg;
 
     /**
      * 风速日期
      */
-    private Date windDate;
+    private String windDate;
 
     /**
      * 全天最大风速
      */
-    private Double windMaxSpeed;
+    private BigDecimal windMaxSpeed;
 
     /**
      * 全天最大风向
      */
-    private Double windMaxDirection;
+    private BigDecimal windMaxDirection;
 
     /**
      * 全天最小风速
      */
-    private Double windMinSpeed;
+    private BigDecimal windMinSpeed;
 
     /**
      * 全天最小风向
      */
-    private Double windMinDirection;
+    private BigDecimal windMinDirection;
 
     /**
      * 全天平均风速
      */
-    private Double windAvgSpeed;
+    private BigDecimal windAvgSpeed;
 
     /**
      * 全天平均风向
      */
-    private Double windAvgDirection;
+    private BigDecimal windAvgDirection;
 
     /**
      * 白天风速日期
      */
-    private Date wind08h20hDate;
+    private String wind08h20hDate;
 
     /**
      * 白天最大风速
      */
-    private Double wind08h20hMaxSpeed;
+    private BigDecimal wind08h20hMaxSpeed;
 
     /**
      * 白天最大风向
      */
-    private Double wind08h20hMaxDirection;
+    private BigDecimal wind08h20hMaxDirection;
 
     /**
      * 白天最小风速
      */
-    private Double wind08h20hMinSpeed;
+    private BigDecimal wind08h20hMinSpeed;
 
     /**
      * 白天最小风向
      */
-    private Double wind08h20hMinDirection;
+    private BigDecimal wind08h20hMinDirection;
 
     /**
      * 白天平均风速
      */
-    private Double wind08h20hAvgSpeed;
+    private BigDecimal wind08h20hAvgSpeed;
 
     /**
      * 白天平均风向
      */
-    private Double wind08h20hAvgDirection;
+    private BigDecimal wind08h20hAvgDirection;
 
     /**
      * 夜晚风速日期
      */
-    private Date wind20h32hDate;
+    private String wind20h32hDate;
 
     /**
      * 夜晚最大风速
      */
-    private Double wind20h32hMaxSpeed;
+    private BigDecimal wind20h32hMaxSpeed;
 
     /**
      * 夜晚最大风向
      */
-    private Double wind20h32hMaxDirection;
+    private BigDecimal wind20h32hMaxDirection;
 
     /**
      * 夜晚最小风速
      */
-    private Double wind20h32hMinSpeed;
+    private BigDecimal wind20h32hMinSpeed;
 
     /**
      * 夜晚最小风向
      */
-    private Double wind20h32hMinDirection;
+    private BigDecimal wind20h32hMinDirection;
 
     /**
      * 夜晚平均风速
      */
-    private Double wind20h32hAvgSpeed;
+    private BigDecimal wind20h32hAvgSpeed;
 
     /**
      * 夜晚平均风向
      */
-    private Double wind20h32hAvgDirection;
+    private BigDecimal wind20h32hAvgDirection;
 
     /**
      * 湿度日期
      */
-    private Date humidityDate;
+    private String humidityDate;
 
     /**
      * 最大湿度
      */
-    private Double humidityMax;
+    private BigDecimal humidityMax;
 
     /**
      * 最小湿度
      */
-    private Double humidityMin;
+    private BigDecimal humidityMin;
 
     /**
      * 平均湿度
      */
-    private Double humidityAvg;
+    private BigDecimal humidityAvg;
 
     /**
      * 云量日期
      */
-    private Date cloudrateDate;
+    private String cloudrateDate;
 
     /**
      * 最大云量
      */
-    private Double cloudrateMax;
+    private BigDecimal cloudrateMax;
 
     /**
      * 最小云量
      */
-    private Double cloudrateMin;
+    private BigDecimal cloudrateMin;
 
     /**
      * 平均云量
      */
-    private Double cloudrateAvg;
+    private BigDecimal cloudrateAvg;
 
     /**
      * 气压日期
      */
-    private Date pressureDate;
+    private String pressureDate;
 
     /**
      * 最大气压
      */
-    private Double pressureMax;
+    private BigDecimal pressureMax;
 
     /**
      * 最小气压
      */
-    private Double pressureMin;
+    private BigDecimal pressureMin;
 
     /**
      * 平均气压
      */
-    private Double pressureAvg;
+    private BigDecimal pressureAvg;
 
     /**
      * 能见度日期
      */
-    private Date visibilityDate;
+    private String visibilityDate;
 
     /**
      * 最大能见度
      */
-    private Double visibilityMax;
+    private BigDecimal visibilityMax;
 
     /**
      * 最小能见度
      */
-    private Double visibilityMin;
+    private BigDecimal visibilityMin;
 
     /**
      * 平均能见度
      */
-    private Double visibilityAvg;
+    private BigDecimal visibilityAvg;
 
     /**
      * 辐射通量日期
      */
-    private Date dswrfDate;
+    private String dswrfDate;
 
     /**
      * 最大辐射通量
      */
-    private Double dswrfMax;
+    private BigDecimal dswrfMax;
 
     /**
      * 最小辐射通量
      */
-    private Double dswrfMin;
+    private BigDecimal dswrfMin;
 
     /**
      * 平均辐射通量
      */
-    private Double dswrfAvg;
+    private BigDecimal dswrfAvg;
 
     /**
      * 空气质量日期
      */
-    private Date airQualityDate;
+    private String airQualityDate;
 
     /**
      * 中国 aqi 最大值
@@ -426,27 +429,27 @@ public class DailyWeather {
     /**
      * pm2.5 日期
      */
-    private Date pm25Date;
+    private String pm25Date;
 
     /**
      * pm2.5 最大浓度
      */
-    private Double pm25Max;
+    private BigDecimal pm25Max;
 
     /**
      * pm2.5 平均浓度
      */
-    private Double pm25Avg;
+    private BigDecimal pm25Avg;
 
     /**
      * pm2.5 最小浓度
      */
-    private Double pm25Min;
+    private BigDecimal pm25Min;
 
     /**
      * 天气现象日期
      */
-    private Date skyconDate;
+    private String skyconDate;
 
     /**
      * 全天主要天气现象
@@ -466,7 +469,7 @@ public class DailyWeather {
     /**
      * 生活指数日期
      */
-    private Date lifeIndexDate;
+    private String lifeIndexDate;
 
     /**
      * 紫外线指数
@@ -504,6 +507,21 @@ public class DailyWeather {
     private Integer comfortIndex;
 
     /**
+     * 舒适度描述
+     */
+    private String comfortDesc;
+
+    /**
+     * 感冒指数
+     */
+    private Integer coldRiskIndex;
+
+    /**
+     * 感冒描述
+     */
+    private String coldRiskDesc;
+
+    /**
      * 预报时间
      */
     private Date forecastTime;
@@ -512,4 +530,46 @@ public class DailyWeather {
      * 创建时间
      */
     private Date createTime;
+
+
+    private List<Astro> astro;
+
+    private List<Precipitation> precipitation_08h_20h;
+
+    private List<Precipitation> precipitation_20h_32h;
+
+    private List<Precipitation> precipitation;
+
+    private List<Temperature> temperature;
+
+    private List<Temperature> temperature_08h_20h;
+
+    private List<Temperature> temperature_20h_32h;
+
+    private List<Wind> wind;
+
+    private List<Wind> wind_08h_20h;
+
+    private List<Wind> wind_20h_32h;
+
+    private List<Humidity> humidity;
+
+    private List<Cloudrate> cloudrate;
+
+    private List<Pressure> pressure;
+
+    private List<Visibility> visibility;
+
+    private List<Dswrf> dswrf;
+
+    private AirQuality air_quality;
+
+    private List<Skycon> skycon;
+
+    private List<Skycon> skycon_08h_20h;
+
+    private List<Skycon> skycon_20h_32h;
+
+    private LifeIndex life_index;
+
 }

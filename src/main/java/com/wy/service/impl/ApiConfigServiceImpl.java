@@ -8,6 +8,7 @@ import com.wy.service.IApiConfigService;
 import com.wy.utils.RandomStringWithTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Objects;
@@ -35,7 +36,8 @@ public class ApiConfigServiceImpl extends ServiceImpl<ApiConfigMapper, ApiConfig
     }
 
     @Override
-    public synchronized boolean minusTime(String token) {
+    @Transactional
+    public boolean minusTime(String token) {
 
         int count = baseMapper.minusTimeByToken(token);
 

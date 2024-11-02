@@ -1,12 +1,15 @@
 package com.wy.server;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wy.common.constant.CaiYunApiType;
+import com.wy.convert.impl.DailyConvert;
+import com.wy.convert.impl.HourlyConvert;
+import com.wy.convert.impl.MinutelyConvert;
 import com.wy.convert.impl.RealtimeConvert;
-import com.wy.domain.entity.RealtimeWeather;
-import com.wy.domain.entity.WeatherConfig;
+import com.wy.domain.entity.*;
 import com.wy.domain.vo.MqttParam;
 import com.wy.service.IApiConfigService;
 import com.wy.utils.JsonUtil;
@@ -35,7 +38,14 @@ public class WeatherServer {
 
     private final IApiConfigService apiConfigService;
 
-    @Transactional
+    private static final Map<Integer, String> WEATHER_TYPE = new HashMap<>() {{
+        put(1, "realtime");
+        put(2, "minutely");
+        put(3, "hourly?hourlysteps={hourlysteps}");
+        put(4, "daily?dailysteps={dailysteps}");
+    }};
+
+
     public List<String> getWeather(MqttParam mqttParam) {
         Map<String, Object> result = new HashMap<>();
 
@@ -51,8 +61,12 @@ public class WeatherServer {
             return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
         }
 
-        String apiUrl = url + "/" + version + "/" + token + "/" + mqttParam.getLon() + "," + mqttParam.getLat() +
-                "/realtime";
+
+        String apiUrl =
+                StrUtil.format(url + "/" + version + "/" + token + "/" + mqttParam.getLon() + "," + mqttParam.getLat() + "/" + WEATHER_TYPE.get(mqttParam.getType()), new HashMap<String, Integer>() {{
+                    put("hourlysteps", mqttParam.getHourlySteps());
+                    put("dailysteps", mqttParam.getDailySteps());
+                }});
 
         String urlBody = HttpUtil.get(apiUrl);
 
@@ -82,13 +96,37 @@ public class WeatherServer {
         weatherConfig.setType(mqttParam.getType());
         weatherConfig.setCreateTime(new Date());
 
+
         //每个类型的信息  最后在汇总到最外层
         if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_REALTIME)) {
+
             RealtimeWeather realtimeWeather = new RealtimeConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(
                     "realtime")));
-            Map<String, Object> beanToMap = BeanUtil.beanToMap(realtimeWeather);
-            map.putAll(beanToMap);
+            map.putAll(BeanUtil.beanToMap(realtimeWeather));
             resultList.add(JsonUtil.objectToJson(map));
+
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_MINUTELY)) {
+
+            MinutelyWeather minutelyWeather = new MinutelyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(
+                    "minutely")));
+            map.putAll(BeanUtil.beanToMap(minutelyWeather));
+            resultList.add(JsonUtil.objectToJson(map));
+
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_HOURLY)) {
+
+            List<HourlyWeather> hourly =
+                    new HourlyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get("hourly")));
+            for (HourlyWeather hourlyWeather : hourly) {
+                map.putAll(BeanUtil.beanToMap(hourlyWeather));
+                resultList.add(JsonUtil.objectToJson(map));
+            }
+
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_DAILY)) {
+            List<DailyWeather> daily = new DailyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get("daily")));
+            for (DailyWeather dailyWeather : daily) {
+                map.putAll(BeanUtil.beanToMap(dailyWeather));
+                resultList.add(JsonUtil.objectToJson(map));
+            }
         }
 
         return resultList;

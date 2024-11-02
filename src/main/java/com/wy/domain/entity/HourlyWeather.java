@@ -4,11 +4,14 @@ package com.wy.domain.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wy.domain.result.hourly.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -47,7 +50,7 @@ public class HourlyWeather {
     /**
      * 降水时间
      */
-    private Date precipitationDatetime;
+    private String precipitationDatetime;
 
     /**
      * 降水量
@@ -62,7 +65,7 @@ public class HourlyWeather {
     /**
      * 气温时间
      */
-    private Date temperatureDatetime;
+    private String temperatureDatetime;
 
     /**
      * 地表2米气温
@@ -72,7 +75,7 @@ public class HourlyWeather {
     /**
      * 体感温度时间
      */
-    private Date apparentTemperatureDatetime;
+    private String apparentTemperatureDatetime;
 
     /**
      * 体感温度
@@ -82,7 +85,7 @@ public class HourlyWeather {
     /**
      * 风数据时间
      */
-    private Date windDatetime;
+    private String windDatetime;
 
     /**
      * 风速
@@ -97,7 +100,7 @@ public class HourlyWeather {
     /**
      * 湿度时间
      */
-    private Date humidityDatetime;
+    private String humidityDatetime;
 
     /**
      * 相对湿度
@@ -107,7 +110,7 @@ public class HourlyWeather {
     /**
      * 云量时间
      */
-    private Date cloudrateDatetime;
+    private String cloudrateDatetime;
 
     /**
      * 云量
@@ -117,7 +120,7 @@ public class HourlyWeather {
     /**
      * 天气现象时间
      */
-    private Date skyconDatetime;
+    private String skyconDatetime;
 
     /**
      * 天气现象
@@ -127,7 +130,7 @@ public class HourlyWeather {
     /**
      * 气压时间
      */
-    private Date pressureDatetime;
+    private String pressureDatetime;
 
     /**
      * 地面气压
@@ -137,7 +140,7 @@ public class HourlyWeather {
     /**
      * 能见度时间
      */
-    private Date visibilityDatetime;
+    private String visibilityDatetime;
 
     /**
      * 水平能见度
@@ -147,7 +150,7 @@ public class HourlyWeather {
     /**
      * 辐射通量时间
      */
-    private Date dswrfDatetime;
+    private String dswrfDatetime;
 
     /**
      * 向下短波辐射通量
@@ -157,7 +160,7 @@ public class HourlyWeather {
     /**
      * 空气质量时间
      */
-    private Date airQualityDatetime;
+    private String airQualityAqiDatetime;
 
     /**
      * 中国aqi
@@ -170,9 +173,14 @@ public class HourlyWeather {
     private Integer airQualityAqiUsa;
 
     /**
+     * pm2.5浓度时间
+     */
+    private String airQualityPm25Datetime;
+
+    /**
      * pm2.5浓度
      */
-    private BigDecimal airQualityPm25;
+    private BigDecimal airQualityPm25Value;
 
     /**
      * 预报时间
@@ -183,5 +191,27 @@ public class HourlyWeather {
      * 创建时间
      */
     private Date createTime;
+
+    private List<Precipitation> precipitation;
+
+    private List<Temperature> temperature;
+
+    private List<ApparentTemperature> apparent_temperature;
+
+    private List<Wind> wind;
+
+    private List<Humidity> humidity;
+
+    private List<Cloudrate> cloudrate;
+
+    private List<Skycon> skycon;
+
+    private List<Pressure> pressure;
+
+    private List<Visibility> visibility;
+
+    private List<Dswrf> dswrf;
+
+    private AirQuality airQuality;
 
 }
