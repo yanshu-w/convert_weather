@@ -7,6 +7,7 @@ package com.wy.common.constant;
 public class HttpMsg {
 
     public static String SUCCESS = "请求成功";
+    public static String ERROR = "请求失败";
 
     public static String CREATE = "创建成功";
 

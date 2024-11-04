@@ -1,5 +1,6 @@
 package com.wy.common.core;
 
+import com.wy.common.constant.HttpMsg;
 import com.wy.common.constant.HttpStatus;
 
 import java.util.HashMap;
@@ -99,6 +100,11 @@ public class AjaxResult extends HashMap<String, Object> {
         return new AjaxResult(HttpStatus.SUCCESS, msg, data);
     }
 
+    public static AjaxResult success(Boolean data) {
+        return new AjaxResult(data ? HttpStatus.SUCCESS : HttpStatus.ERROR, data ? HttpMsg.SUCCESS : HttpMsg.ERROR,
+                data);
+    }
+
     /**
      * 返回警告消息
      *
@@ -166,6 +172,10 @@ public class AjaxResult extends HashMap<String, Object> {
      */
     public static AjaxResult judgment(Boolean boo) {
         return boo ? success() : error();
+    }
+
+    public static AjaxResult tokenError(String msg) {
+        return AjaxResult.error(HttpStatus.UNAUTHORIZED, msg);
     }
 
     /**

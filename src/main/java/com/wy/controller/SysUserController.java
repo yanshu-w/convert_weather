@@ -1,6 +1,7 @@
 package com.wy.controller;
 
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.wy.common.constant.HttpMsg;
 import com.wy.common.core.AjaxResult;
 import com.wy.domain.dto.LoginParam;
@@ -25,6 +26,12 @@ public class SysUserController {
         String token = sysUserService.getSysUserPwd(loginParam);
 
         return AjaxResult.success(HttpMsg.LOGIN, token);
+    }
+
+    @PostMapping("/logout")
+    public AjaxResult logout() {
+        StpUtil.logout();
+        return AjaxResult.success();
     }
 
 }

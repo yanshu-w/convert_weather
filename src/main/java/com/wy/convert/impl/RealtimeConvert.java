@@ -2,6 +2,7 @@ package com.wy.convert.impl;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import com.wy.common.constant.DictConstant;
 import com.wy.convert.ResultConvert;
 import com.wy.domain.entity.RealtimeWeather;
 import com.wy.utils.JsonUtil;
@@ -15,6 +16,7 @@ public class RealtimeConvert implements ResultConvert<RealtimeWeather> {
     public RealtimeWeather doConvert(String resultStr) {
         Map<String, Object> map = JsonUtil.JsonToMap(resultStr, String.class, Object.class);
         RealtimeWeather realtimeWeather = BeanUtil.toBean(map, RealtimeWeather.class);
+        realtimeWeather.setSkycon(DictConstant.Skycon.getName(realtimeWeather.getSkycon()));
         realtimeWeather.setCreateTime(new Date());
         realtimeWeather.setForecastTime(new Date());
         return realtimeWeather;

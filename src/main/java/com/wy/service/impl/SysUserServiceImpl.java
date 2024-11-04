@@ -22,7 +22,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public String getSysUserPwd(LoginParam loginParam) {
-        SysUser sysUser = lambdaQuery().eq(SysUser::getUserName, loginParam.getUserName()).last("limit 1").one();
+        SysUser sysUser = lambdaQuery().eq(SysUser::getUserName, loginParam.getUsername()).last("limit 1").one();
 
         if (Objects.isNull(sysUser)) {
             throw new ServiceException("未找到相关账号信息");
@@ -35,7 +35,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return StpUtil.getTokenValue();
         }
 
-        throw new ServiceException("登录失败；请联系管理员");
+        throw new ServiceException("密码错误");
     }
 
 }

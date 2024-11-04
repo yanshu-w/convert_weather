@@ -1,6 +1,7 @@
 package com.wy.convert.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.wy.common.constant.DictConstant;
 import com.wy.convert.ResultConvert;
 import com.wy.domain.entity.DailyWeather;
 import com.wy.domain.result.daily.*;
@@ -82,7 +83,7 @@ public class DailyConvert implements ResultConvert<List<DailyWeather>> {
             LifeIndex.Value coldRisk = coldRiskList.get(i);
 
             DailyWeather dailyWeather = new DailyWeather();
-            
+
             dailyWeather.setStatus(originData.getStatus());
             dailyWeather.setAstroDate(astro.getDate());
             dailyWeather.setSunriseTime(astro.getSunrise().getTime());
@@ -167,9 +168,9 @@ public class DailyConvert implements ResultConvert<List<DailyWeather>> {
             dailyWeather.setPm25Min(pm25.getMin());
             dailyWeather.setPm25Avg(pm25.getAvg());
             dailyWeather.setSkyconDate(skycon.getDate());
-            dailyWeather.setSkyconValue(skycon.getValue());
-            dailyWeather.setSkycon08h20hValue(skycon08h20h.getValue());
-            dailyWeather.setSkycon20h32hValue(skycon20h32h.getValue());
+            dailyWeather.setSkyconValue(DictConstant.Skycon.getName(skycon.getValue()));
+            dailyWeather.setSkycon08h20hValue(DictConstant.Skycon.getName(skycon08h20h.getValue()));
+            dailyWeather.setSkycon20h32hValue(DictConstant.Skycon.getName(skycon20h32h.getValue()));
             dailyWeather.setLifeIndexDate(ultraviolet.getDate());
             dailyWeather.setUltravioletIndex(ultraviolet.getIndex());
             dailyWeather.setUltravioletDesc(ultraviolet.getDesc());

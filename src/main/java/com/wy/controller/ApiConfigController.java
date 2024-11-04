@@ -1,13 +1,16 @@
 package com.wy.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.wy.common.constant.HttpMsg;
 import com.wy.common.core.AjaxResult;
+import com.wy.domain.dto.ApiConfigDto;
+import com.wy.domain.dto.UpdateTimeDto;
+import com.wy.domain.vo.ApiConfigVo;
 import com.wy.service.IApiConfigService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -31,17 +34,28 @@ public class ApiConfigController {
      * 修改密钥的可用次数
      */
     @PostMapping("/updateTime")
-    public AjaxResult updateTime() {
+    public AjaxResult updateTime(@RequestBody UpdateTimeDto updateTimeDto) {
+        boolean b = apiConfigService.updateTimeById(updateTimeDto);
+        return AjaxResult.success(b);
+    }
 
-        return AjaxResult.error();
+    /*
+    过期
+     */
+    @PostMapping("/overdue")
+    public AjaxResult overdue(@RequestBody UpdateTimeDto updateTimeDto) {
+        boolean b = apiConfigService.overdue(updateTimeDto);
+        return AjaxResult.success(b);
     }
 
     /**
      * 查看所有密钥
      */
     @PostMapping("/getPage")
-    public AjaxResult getPage() {
+    public AjaxResult getPage(@RequestBody ApiConfigDto apiConfigDto) {
 
-        return AjaxResult.error();
+        PageInfo<ApiConfigVo> pageInfo = apiConfigService.getPageInfo(apiConfigDto);
+
+        return AjaxResult.success(pageInfo);
     }
 }

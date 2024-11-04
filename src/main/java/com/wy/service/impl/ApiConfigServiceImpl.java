@@ -2,7 +2,13 @@ package com.wy.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.wy.domain.dto.ApiConfigDto;
+import com.wy.domain.dto.UpdateTimeDto;
 import com.wy.domain.entity.ApiConfig;
+import com.wy.domain.vo.ApiConfigVo;
 import com.wy.mapper.ApiConfigMapper;
 import com.wy.service.IApiConfigService;
 import com.wy.utils.RandomStringWithTime;
@@ -49,5 +55,29 @@ public class ApiConfigServiceImpl extends ServiceImpl<ApiConfigMapper, ApiConfig
         Integer i = baseMapper.checkToken(token);
 
         return !Objects.equals(Objects.isNull(i) ? 0 : i, 0);
+    }
+
+    @Override
+    public boolean updateTimeById(UpdateTimeDto updateTimeDto) {
+        boolean update = lambdaUpdate().set(ApiConfig::getApiTime, updateTimeDto.getApiTime()).eq(ApiConfig::getId,
+                updateTimeDto.getId()).update();
+        return update;
+    }
+
+    @Override
+    public PageInfo<ApiConfigVo> getPageInfo(ApiConfigDto apiConfigDto) {
+
+        PageInfo<ApiConfigVo> objects =
+                PageHelper.startPage(apiConfigDto.getCurrent(), apiConfigDto.getPageSize()).doSelectPageInfo(() -> baseMapper.getPageList(apiConfigDto));
+
+
+        return objects;
+    }
+
+    @Override
+    public boolean overdue(UpdateTimeDto updateTimeDto) {
+        boolean update = lambdaUpdate().set(ApiConfig::getExpire, updateTimeDto.getExpire()).eq(ApiConfig::getId,
+                updateTimeDto.getId()).update();
+        return update;
     }
 }

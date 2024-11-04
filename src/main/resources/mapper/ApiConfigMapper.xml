@@ -21,4 +21,8 @@
         limit 1
     </select>
 
+    <select id="getPageList" resultType="com.wy.domain.vo.ApiConfigVo">
+        select * from api_config order by create_time desc
+    </select>
+
 </mapper>

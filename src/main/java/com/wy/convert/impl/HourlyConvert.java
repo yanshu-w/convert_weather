@@ -1,6 +1,7 @@
 package com.wy.convert.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.wy.common.constant.DictConstant;
 import com.wy.convert.ResultConvert;
 import com.wy.domain.entity.HourlyWeather;
 import com.wy.domain.result.hourly.*;
@@ -72,7 +73,7 @@ public class HourlyConvert implements ResultConvert<List<HourlyWeather>> {
             hourlyWeather.setCloudrateDatetime(cloudrate.getDatetime());
             hourlyWeather.setCloudrateValue(cloudrate.getValue());
             hourlyWeather.setSkyconDatetime(skycon.getDatetime());
-            hourlyWeather.setSkyconValue(skycon.getValue());
+            hourlyWeather.setSkyconValue(DictConstant.Skycon.getName(skycon.getValue()));
             hourlyWeather.setPressureDatetime(pressure.getDatetime());
             hourlyWeather.setPressureValue(pressure.getValue());
             hourlyWeather.setVisibilityDatetime(visibility.getDatetime());

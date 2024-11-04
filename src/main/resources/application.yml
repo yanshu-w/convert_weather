@@ -31,5 +31,6 @@ spring:
     token-name: cwea_token
     allow-concurrent-login: false
     token-style: uuid
+#    timeout:
 pwd:
   salt: $1$.cwea1031$

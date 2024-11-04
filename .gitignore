@@ -45,4 +45,4 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
-/spay-ui/node_modules/
+/cwea-ui/node_modules/

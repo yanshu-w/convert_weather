@@ -1,5 +1,6 @@
 package com.wy.common.exception;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import com.wy.common.core.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,13 +30,11 @@ public class GlobalExceptionHandler {
     }
 
 
-
     /**
      * 拦截未知的运行时异常
      */
-//    @ExceptionHandler(RuntimeException.class)
-    public AjaxResult handleRuntimeException(RuntimeException e, HttpServletRequest request)
-    {
+    @ExceptionHandler(RuntimeException.class)
+    public AjaxResult handleRuntimeException(RuntimeException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',发生未知异常.", requestURI, e);
         return AjaxResult.error(e.getMessage());
@@ -44,12 +43,21 @@ public class GlobalExceptionHandler {
     /**
      * 系统异常
      */
-//    @ExceptionHandler(Exception.class)
-    public AjaxResult handleException(Exception e, HttpServletRequest request)
-    {
+    @ExceptionHandler(Exception.class)
+    public AjaxResult handleException(Exception e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',发生系统异常.", requestURI, e);
         return AjaxResult.error(e.getMessage());
+    }
+
+    /**
+     * token无效
+     */
+    @ExceptionHandler(NotLoginException.class)
+    public AjaxResult handleNotLoginException(Exception e, HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        log.error("请求地址'{}',发生系统异常.", requestURI, e);
+        return AjaxResult.tokenError(e.getMessage());
     }
 
 }

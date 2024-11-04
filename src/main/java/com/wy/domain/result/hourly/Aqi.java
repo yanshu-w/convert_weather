@@ -3,6 +3,8 @@ package com.wy.domain.result.hourly;
 
 import lombok.Data;
 
+import java.util.Objects;
+
 @Data
 public class Aqi {
 
@@ -10,6 +12,9 @@ public class Aqi {
 
     private Value value;
 
+    public Value getValue() {
+        return Objects.isNull(value) ? new Value() : value;
+    }
 
     @Data
     public static
