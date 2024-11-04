@@ -32,7 +32,7 @@ public class MqttClientCreator {
     public static MqttClient createMqttClient(MqttParam mqttParam) throws MqttException {
         MqttClient mqttClient = createMqttClient(mqttParam.getBroker(), mqttParam.getToken(), mqttParam.getUsername()
                 , mqttParam.getPassword());
-        push(mqttParam.getToken(), mqttClient);
+        push(mqttParam.getBroker(), mqttClient);
         return mqttClient;
     }
 

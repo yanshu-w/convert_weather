@@ -29,7 +29,7 @@ public class MqttPublishServer {
     public void sendMessage(String content, MqttParam mqttParam) throws MqttException {
 
         //获取生产客户端
-        MqttClient mqttClient = MqttClientCreator.get(mqttParam.getToken());
+        MqttClient mqttClient = MqttClientCreator.get(mqttParam.getBroker());
 
         if (Objects.isNull(mqttClient)) {
             //创建生产客户端

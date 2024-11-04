@@ -22,15 +22,25 @@ public class Sender {
 
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("type", 4);
-        jsonObject.put("token", "nN91Rur9uid002xHEl");
+        //获取数据类型：1-实时；2-分钟（咱不可用）；3-小时级；4-天级别
+        jsonObject.put("type", 1);
+        //从后台获取的签名
+        jsonObject.put("token", "kV4n0K1wBi1sLWPZUD");
+        //小时数（type=3必填）
         jsonObject.put("hourlySteps", "3");
+        //天数（type=4必填）
         jsonObject.put("dailySteps", "3");
+        //纬度
         jsonObject.put("lat", "49.2072");
+        //经度
         jsonObject.put("lon", "102.6656");
+        //接受的主题
         jsonObject.put("noticeTopic", "my_receive_topic");
+        //接受的域名+端口
         jsonObject.put("broker", "tcp://ict.xsjhwy.com:1883");
+        //用户名
         jsonObject.put("username", "xsjhwy");
+        //密码
         jsonObject.put("password", "xsjhwy123456*");
 
         MqttClient client = new MqttClient(broker, clientId, new MemoryPersistence());
