@@ -22,7 +22,7 @@ public class Sender {
 
         JSONObject jsonObject = new JSONObject();
 
-        //获取数据类型：1-实时；2-分钟（咱不可用）；3-小时级；4-天级别
+        //获取数据类型：1-实时；2-分钟（暂不可用）；3-小时级；4-天级别
         jsonObject.put("type", 1);
         //从后台获取的签名
         jsonObject.put("token", "kV4n0K1wBi1sLWPZUD");
@@ -34,9 +34,9 @@ public class Sender {
         jsonObject.put("lat", "49.2072");
         //经度
         jsonObject.put("lon", "102.6656");
-        //接受的主题
+        //接收的主题
         jsonObject.put("noticeTopic", "my_receive_topic");
-        //接受的域名+端口
+        //接收的域名+端口
         jsonObject.put("broker", "tcp://ict.xsjhwy.com:1883");
         //用户名
         jsonObject.put("username", "xsjhwy");

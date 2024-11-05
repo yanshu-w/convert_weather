@@ -46,3 +46,4 @@ nbdist/
 !*/build/*.html
 !*/build/*.xml
 /cwea-ui/node_modules/
+/doc/~WRL0001.tmp
