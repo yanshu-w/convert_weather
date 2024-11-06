@@ -1,14 +1,13 @@
 package com.wy.config;
 
+import cn.hutool.core.collection.ListUtil;
 import com.wy.domain.vo.MqttParam;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -42,6 +41,14 @@ public class MqttClientCreator {
 
     public static MqttClient get(String token) {
         return clientMap.get(token);
+    }
+
+    public static void clearClientMap() {
+        clientMap.clear();
+    }
+
+    public static Collection<MqttClient> allClient(){
+        return clientMap.values();
     }
 
 

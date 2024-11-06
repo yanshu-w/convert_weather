@@ -28,7 +28,7 @@ public class SysUserController {
         return AjaxResult.success(HttpMsg.LOGIN, token);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/doLogout")
     public AjaxResult logout() {
         StpUtil.logout();
         return AjaxResult.success();

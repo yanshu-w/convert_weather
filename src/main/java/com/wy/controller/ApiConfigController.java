@@ -58,4 +58,13 @@ public class ApiConfigController {
 
         return AjaxResult.success(pageInfo);
     }
+
+    /**
+     * 删除
+     */
+    @PostMapping("/remove")
+    public AjaxResult remove(@RequestParam Long id) {
+        boolean b = apiConfigService.removeById(id);
+        return AjaxResult.success(b);
+    }
 }

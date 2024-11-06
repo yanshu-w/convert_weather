@@ -5,24 +5,27 @@
 <mapper namespace="com.wy.mapper.ApiConfigMapper">
 
     <update id="minusTimeByToken">
-
         update api_config
-        set api_time = api_time - 1
+        set api_time = api_time - 1,
+            last_request_time = now()
         where api_token = #{token}
-
+          and del_flag = 0
     </update>
 
     <select id="checkToken" resultType="java.lang.Integer">
-
         select api_time
         from api_config
         where api_token = #{token}
           and expire = 0
+          and del_flag = 0
         limit 1
     </select>
 
     <select id="getPageList" resultType="com.wy.domain.vo.ApiConfigVo">
-        select * from api_config order by create_time desc
+        select id, api_time, api_token, expire, create_time, del_flag, last_request_time
+        from api_config
+        where del_flag = 0
+        order by create_time desc
     </select>
 
 </mapper>

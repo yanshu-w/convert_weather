@@ -44,9 +44,28 @@
                                     {{ dateFormat(scope.row.createTime) }}
                                 </template>
                             </el-table-column>
+                            <el-table-column prop="lastRequestTime" label="最后请求时间" width="180">
+                                <template #default="scope">
+                                    {{ dateFormat(scope.row.lastRequestTime) }}
+                                </template>
+                            </el-table-column>
                             <el-table-column prop="updateTime" label="操作" width="180">
                                 <template #default="scope">
                                     <el-button type="text" @click="openUpdateTime(scope.row)">修改次数</el-button>
+
+                                    <el-popconfirm width="220" :icon="InfoFilled" icon-color="#626AEF" title="确定要删除吗？"
+                                        @confirm="removeToken(scope.row)">
+                                        <template #reference>
+                                            <el-button text type="danger">删除</el-button>
+                                        </template>
+                                        <template #actions="{ confirm, cancel }">
+                                            <el-button size="small" @click="cancel">否</el-button>
+                                            <el-button type="danger" size="small" @click="confirm">
+                                                是
+                                            </el-button>
+                                        </template>
+                                    </el-popconfirm>
+
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -60,6 +79,7 @@
 
                         <div>
                             <el-button type="primary" @click="addOneToken">新增</el-button>
+                            <el-button type="info" @click="loadPage">刷新</el-button>
                         </div>
                     </div>
 
@@ -92,7 +112,7 @@
 
 
 <script setup>
-import { getPage, updateTime, createToken, overdue } from '@/api/index.js'
+import { getPage, updateTime, createToken, overdue, remove } from '@/api/index.js'
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus';
@@ -148,9 +168,22 @@ const changeExpire = async (row) => {
     }
 }
 
+const removeToken = async (row) => {
+    const res = await remove({ id: row.id })
+    if (res.code == 200) {
+        ElMessage.success('删除成功')
+        loadPage();
+    } else {
+        ElMessage.error('删除失败')
+    }
+}
+
 
 // 格式化时间
 const dateFormat = (date) => {
+    if (!date) {
+        return '';
+    }
     return format(date, 'yyyy-MM-dd');
 }
 
@@ -193,7 +226,7 @@ const onCurrentChange = (current) => {
     loadPage();
 }
 
- 
+
 
 
 onMounted(() => {

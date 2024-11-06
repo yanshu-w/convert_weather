@@ -33,6 +33,14 @@ export function getPage(data) {
     })
 }
 
+export function remove(param) {
+    return request({
+        url: "/apiConfig/remove",
+        method: "post",
+        params:param
+    })
+}
+
 
 
 

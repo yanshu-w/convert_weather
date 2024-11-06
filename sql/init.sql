@@ -509,3 +509,10 @@ create table sys_user
     login_date datetime                null comment '最后登录时间'
 )
     comment '用户信息表';
+
+
+alter table api_config
+    add del_flag int default 0 null comment '删除标记';
+
+alter table api_config
+    add last_request_time datetime null comment '最后一次请求时间';

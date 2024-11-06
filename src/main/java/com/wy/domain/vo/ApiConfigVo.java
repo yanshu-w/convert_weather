@@ -32,4 +32,9 @@ public class ApiConfigVo {
      * 记录创建时间
      */
     private Date createTime;
+
+    /**
+     * 最后一次请求时间
+     */
+    private Date lastRequestTime;
 }

@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -67,6 +68,25 @@ public class MqttPublishServer {
         }
 
 
+    }
+
+    /**
+     * 每天凌晨1点执行
+     * 清楚所有关闭所有连接客户端
+     */
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void stopAllClient() {
+        //关闭所有连接
+        Collection<MqttClient> mqttClients = MqttClientCreator.allClient();
+        try {
+            for (MqttClient mqttClient : mqttClients) {
+                mqttClient.close();
+            }
+        } catch (Exception e) {
+            log.error(PrintErrorUtil.print(e));
+        }
+        //清楚所有连接
+        MqttClientCreator.clearClientMap();
     }
 
 
