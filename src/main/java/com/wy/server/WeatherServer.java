@@ -1,6 +1,7 @@
 package com.wy.server;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -51,37 +52,35 @@ public class WeatherServer {
 
         List<String> resultList = new ArrayList<>();
 
-
         //校验mqtt的token
         boolean bole = apiConfigService.checkToken(mqttParam.getToken());
 
         if (!bole) {
             result.put("status", "error");
-            result.put("msg", "请求次数已经耗尽，请联系管理员");
+            result.put("msg", Content.GET_API_TIME_ERROR);
             return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
         }
 
-
         String apiUrl =
                 StrUtil.format(url + "/" + version + "/" + token + "/" + mqttParam.getLon() + "," + mqttParam.getLat() + "/" + WEATHER_TYPE.get(mqttParam.getType()), new HashMap<String, Integer>() {{
-                    put("hourlysteps", mqttParam.getHourlySteps());
-                    put("dailysteps", mqttParam.getDailySteps());
-                }});
+            put("hourlysteps", mqttParam.getHourlySteps());
+            put("dailysteps", mqttParam.getDailySteps());
+        }});
 
         String urlBody = HttpUtil.get(apiUrl);
 
         if (StringUtils.isBlank(urlBody)) {
-            result.put("status", "error");
-            result.put("msg", "获取天气失败，请联系管理员");
-            return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
+            return returnError(Content.GET_API_ERROR);
         }
 
         Map<String, Object> map = JsonUtil.JsonToMap(urlBody, String.class, Object.class);
 
+        if (CollUtil.isEmpty(map)) {
+            return returnError(Content.GET_API_ERROR);
+        }
+
         if (!Objects.equals(map.get("status"), "ok")) {
-            result.put("status", "error");
-            result.put("msg", "获取天气失败，请联系管理员");
-            return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
+            return returnError(Content.GET_API_ERROR);
         }
 
         //签名次数减一
@@ -90,39 +89,33 @@ public class WeatherServer {
         LinkedHashMap mapOfResult = (LinkedHashMap) map.get("result");
         map.remove("result");
 
-
-        //最外层的信息
-        WeatherConfig weatherConfig = BeanUtil.toBean(map, WeatherConfig.class);
-        weatherConfig.setType(mqttParam.getType());
-        weatherConfig.setCreateTime(new Date());
-
-
         //每个类型的信息  最后在汇总到最外层
-        if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_REALTIME)) {
+        if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_REALTIME.getCode())) {
 
-            RealtimeWeather realtimeWeather = new RealtimeConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(
-                    "realtime")));
+            RealtimeWeather realtimeWeather =
+                    new RealtimeConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(CaiYunApiType.TYPE_REALTIME.getResultName())));
             map.putAll(BeanUtil.beanToMap(realtimeWeather));
             resultList.add(JsonUtil.objectToJson(map));
 
-        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_MINUTELY)) {
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_MINUTELY.getCode())) {
 
-            MinutelyWeather minutelyWeather = new MinutelyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(
-                    "minutely")));
+            MinutelyWeather minutelyWeather =
+                    new MinutelyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(CaiYunApiType.TYPE_MINUTELY.getResultName())));
             map.putAll(BeanUtil.beanToMap(minutelyWeather));
             resultList.add(JsonUtil.objectToJson(map));
 
-        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_HOURLY)) {
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_HOURLY.getCode())) {
 
             List<HourlyWeather> hourly =
-                    new HourlyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get("hourly")));
+                    new HourlyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(CaiYunApiType.TYPE_HOURLY.getResultName())));
             for (HourlyWeather hourlyWeather : hourly) {
                 map.putAll(BeanUtil.beanToMap(hourlyWeather));
                 resultList.add(JsonUtil.objectToJson(map));
             }
 
-        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_DAILY)) {
-            List<DailyWeather> daily = new DailyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get("daily")));
+        } else if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_DAILY.getCode())) {
+            List<DailyWeather> daily =
+                    new DailyConvert().doConvert(JsonUtil.objectToJson(mapOfResult.get(CaiYunApiType.TYPE_DAILY.getResultName())));
             for (DailyWeather dailyWeather : daily) {
                 map.putAll(BeanUtil.beanToMap(dailyWeather));
                 resultList.add(JsonUtil.objectToJson(map));
@@ -130,6 +123,19 @@ public class WeatherServer {
         }
 
         return resultList;
+    }
+
+
+    private List<String> returnError(String msg) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", "error");
+        result.put("msg", msg);
+        return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
+    }
+
+    static class Content {
+        public static final String GET_API_ERROR = "获取天气失败，请联系管理员";
+        public static final String GET_API_TIME_ERROR = "请求次数已经耗尽，请联系管理员";
     }
 
 }
