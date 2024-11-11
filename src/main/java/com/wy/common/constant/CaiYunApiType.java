@@ -1,26 +1,38 @@
 package com.wy.common.constant;
 
 
-public class CaiYunApiType {
+import lombok.Getter;
+
+@Getter
+public enum CaiYunApiType {
 
     /**
      * 实况数据
      */
-    public static final Integer TYPE_REALTIME = 1;
+    TYPE_REALTIME(1, "realtime"),
 
     /**
      * 分钟级降水
      */
-    public static final Integer TYPE_MINUTELY = 2;
+    TYPE_MINUTELY(2, "minutely"),
 
     /**
      * 小时级
      */
-    public static final Integer TYPE_HOURLY = 3;
+    TYPE_HOURLY(3, "hourly"),
 
     /**
      * 天级
      */
-    public static final Integer TYPE_DAILY = 4;
+    TYPE_DAILY(4, "daily");
+
+
+    private final Integer code;
+    private final String resultName;
+
+    CaiYunApiType(java.lang.Integer code, String resultName) {
+        this.code = code;
+        this.resultName = resultName;
+    }
 
 }
