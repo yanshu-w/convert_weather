@@ -64,9 +64,9 @@ public class WeatherServer {
 
         String apiUrl =
                 StrUtil.format(url + "/" + version + "/" + token + "/" + mqttParam.getLon() + "," + mqttParam.getLat() + "/" + WEATHER_TYPE.get(mqttParam.getType()), new HashMap<String, Integer>() {{
-            put("hourlysteps", mqttParam.getHourlySteps());
-            put("dailysteps", mqttParam.getDailySteps());
-        }});
+                    put("hourlysteps", mqttParam.getHourlySteps());
+                    put("dailysteps", mqttParam.getDailySteps());
+                }});
 
         String urlBody = HttpUtil.get(apiUrl);
 
@@ -89,7 +89,7 @@ public class WeatherServer {
 
         LinkedHashMap mapOfResult = (LinkedHashMap) map.get("result");
         map.remove("result");
-        map.put("api_time", apiTime-1);
+        map.put("api_time", apiTime - 1);
 
         //每个类型的信息  最后在汇总到最外层
         if (Objects.equals(mqttParam.getType(), CaiYunApiType.TYPE_REALTIME.getCode())) {
