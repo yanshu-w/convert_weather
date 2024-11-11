@@ -51,10 +51,9 @@ public class ApiConfigServiceImpl extends ServiceImpl<ApiConfigMapper, ApiConfig
     }
 
     @Override
-    public boolean checkToken(String token) {
-        Integer i = baseMapper.checkToken(token);
+    public Integer checkToken(String token) {
 
-        return !Objects.equals(Objects.isNull(i) ? 0 : i, 0);
+        return baseMapper.checkToken(token);
     }
 
     @Override

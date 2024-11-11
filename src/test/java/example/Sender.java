@@ -25,7 +25,7 @@ public class Sender {
         //获取数据类型：1-实时；2-分钟（暂不可用）；3-小时级；4-天级别
         jsonObject.put("type", 1);
         //从后台获取的签名
-        jsonObject.put("token", "lLP57n1o7419AN0Ayl");
+        jsonObject.put("token", "xawl0N0mBN32gy8t14");
         //小时数（type=3必填）
         jsonObject.put("hourlySteps", "3");
         //天数（type=4必填）

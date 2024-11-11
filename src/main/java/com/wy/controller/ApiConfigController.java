@@ -39,8 +39,8 @@ public class ApiConfigController {
         return AjaxResult.success(b);
     }
 
-    /*
-    过期
+    /**
+     * 过期
      */
     @PostMapping("/overdue")
     public AjaxResult overdue(@RequestBody UpdateTimeDto updateTimeDto) {

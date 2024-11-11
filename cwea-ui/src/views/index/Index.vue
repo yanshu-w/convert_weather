@@ -1,6 +1,6 @@
 <template>
 
-    <div class="index_back">
+    <div class="index_back" v-loading="loading">
         <el-header>
             <el-menu class="menu" mode="horizontal">
                 <el-menu-item index="1">首页</el-menu-item>
@@ -11,7 +11,7 @@
             </el-menu>
         </el-header>
 
-        <div class="content">
+        <div class="content" >
 
             <div>
                 <el-card>
@@ -51,7 +51,7 @@
                             </el-table-column>
                             <el-table-column prop="updateTime" label="操作" width="180">
                                 <template #default="scope">
-                                    <el-button type="text" @click="openUpdateTime(scope.row)">修改次数</el-button>
+                                    <el-button text @click="openUpdateTime(scope.row)">修改次数</el-button>
 
                                     <el-popconfirm width="220" :icon="InfoFilled" icon-color="#626AEF" title="确定要删除吗？"
                                         @confirm="removeToken(scope.row)">
@@ -116,6 +116,7 @@ import { getPage, updateTime, createToken, overdue, remove } from '@/api/index.j
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus';
+import {InfoFilled} from '@element-plus/icons-vue';
 import { format } from 'date-fns';
 import { login, logout } from '@/api/login';
 
@@ -128,6 +129,8 @@ const form = ref({
     apiToken: '',
     apiTime: '',
 })
+
+const loading = ref(false);
 
 // 修改次数
 const openUpdateTime = (row) => {
@@ -148,9 +151,7 @@ const updateApiTime = async () => {
         ElMessage.error('修改失败')
     }
 }
-
-
-const loading = ref(false)
+ 
 
 const queryParam = ref({
     current: 1,
@@ -247,7 +248,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 10%;
+    padding-top: 5%;
 }
 
 .menu {

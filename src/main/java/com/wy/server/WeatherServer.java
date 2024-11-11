@@ -52,10 +52,10 @@ public class WeatherServer {
         List<String> resultList = new ArrayList<>();
 
 
-        //校验mqtt的token
-        boolean bole = apiConfigService.checkToken(mqttParam.getToken());
+        //校验mqtt的token；获取次数
+        Integer apiTime = apiConfigService.checkToken(mqttParam.getToken());
 
-        if (!bole) {
+        if (Objects.isNull(apiTime) || Objects.equals(apiTime, 0)) {
             result.put("status", "error");
             result.put("msg", "请求次数已经耗尽，请联系管理员");
             return List.of(Objects.requireNonNull(JsonUtil.objectToJson(result)));
@@ -89,6 +89,7 @@ public class WeatherServer {
 
         LinkedHashMap mapOfResult = (LinkedHashMap) map.get("result");
         map.remove("result");
+        map.put("api_time", apiTime-1);
 
 
         //最外层的信息

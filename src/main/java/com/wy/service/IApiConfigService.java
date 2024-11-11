@@ -13,7 +13,7 @@ public interface IApiConfigService extends IService<ApiConfig> {
 
     boolean minusTime(String token);
 
-    boolean checkToken(String token);
+    Integer checkToken(String token);
 
     boolean updateTimeById(UpdateTimeDto updateTimeDto);
 

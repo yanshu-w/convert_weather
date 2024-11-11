@@ -13,11 +13,12 @@
                 <div style="padding: 20px;">
                     <el-form :rules="loginRules" :model="loginParam" ref="loginForm">
                         <el-form-item prop="username">
-                            <el-input v-model="loginParam.username" placeholder="用户名" style="border: none;"></el-input>
+                            <el-input v-model="loginParam.username" @keyup.enter.native="doLogin" placeholder="用户名"
+                                style="border: none;"></el-input>
                         </el-form-item>
                         <el-form-item prop="password">
-                            <el-input type="password" v-model="loginParam.password" placeholder="密码 "
-                                show-password></el-input>
+                            <el-input type="password" v-model="loginParam.password" @keyup.enter.native="doLogin"
+                                placeholder="密码 " show-password></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" @click="doLogin" style="width: 100%;">登录</el-button>

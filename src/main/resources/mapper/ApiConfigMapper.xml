@@ -16,7 +16,7 @@
         select api_time
         from api_config
         where api_token = #{token}
-          and expire = 0
+          and `expire` = 0
           and del_flag = 0
         limit 1
     </select>

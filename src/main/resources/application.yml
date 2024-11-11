@@ -17,7 +17,7 @@ mqtt:
   #账号xsjhwy密码xsjhwy123456*
 
 caiyun:
-  token: pjgwFxZMzaqWSEV6
+  token: q3zW3FeZDKaiCGky
   url: https://api.caiyunapp.com
   version: v2.6
 mybatis-plus:
