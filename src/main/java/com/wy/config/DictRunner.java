@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class DictLoader implements ApplicationRunner {
+public class DictRunner implements ApplicationRunner {
 
     @Resource
     private IDictService dictService;

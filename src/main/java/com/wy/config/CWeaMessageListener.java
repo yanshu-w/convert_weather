@@ -1,9 +1,11 @@
 package com.wy.config;
 
+import cn.hutool.core.collection.CollUtil;
 import com.wy.domain.vo.MqttParam;
 import com.wy.server.MqttPublishServer;
 import com.wy.server.WeatherServer;
 import com.wy.utils.JsonUtil;
+import com.wy.utils.NotNullChecker;
 import com.wy.utils.PrintErrorUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +37,7 @@ public class CWeaMessageListener implements IMqttMessageListener {
             log.error("未接收到消息");
             return;
         }
+
         //将param存入队列 依次执行
         MqttClientCreator.ParamQueue.add(mqttParam);
     }

@@ -35,12 +35,12 @@ public class MqttClientCreator {
         return mqttClient;
     }
 
-    public static void push(String token, MqttClient mqttClient) {
-        clientMap.put(token, mqttClient);
+    public static void push(String broker, MqttClient mqttClient) {
+        clientMap.put(broker, mqttClient);
     }
 
-    public static MqttClient get(String token) {
-        return clientMap.get(token);
+    public static MqttClient get(String broker) {
+        return clientMap.get(broker);
     }
 
     public static void clearClientMap() {
