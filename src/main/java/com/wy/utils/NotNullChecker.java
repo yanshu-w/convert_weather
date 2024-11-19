@@ -22,7 +22,7 @@ public class NotNullChecker {
             List<String> fieldNames = new ArrayList<>();
 
             for (Field field : fields) {
-//                field.setAccessible(true);
+                field.setAccessible(true);
                 NotNull annotation = field.getAnnotation(NotNull.class);
                 if (Objects.isNull(annotation)) {
                     continue;
@@ -35,9 +35,9 @@ public class NotNullChecker {
             return fieldNames;
         } catch (Exception e) {
             log.error(PrintErrorUtil.print(e));
-            throw new RuntimeException();
+//            throw new RuntimeException();
         }
-//        return List.of();
+        return List.of();
     }
 
 

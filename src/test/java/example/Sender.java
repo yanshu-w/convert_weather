@@ -17,7 +17,7 @@ public class Sender {
         String username = "xsjhwy";
         String password = "xsjhwy123456*";
         String clientId = "publish_client";
-        String topic = "mqtt/cwea_wy_subscribe_topic_3";
+        String topic = "mqtt/cwea_wy_subscribe_topic";
 //        String topic = "mqtt/test";
 
         JSONObject jsonObject = new JSONObject();
@@ -35,10 +35,10 @@ public class Sender {
         //经度
         jsonObject.put("lon", "102.6656");
         //接收的主题
-        jsonObject.put("noticeTopic", "my_receive_topic_3");
+        jsonObject.put("noticeTopic", "my_receive_topic");
         //接收的域名+端口
-        jsonObject.put("broker", "0");
-//        jsonObject.put("broker", "tcp://ict.xsjhwy.com:1883");
+//        jsonObject.put("broker", "0");
+        jsonObject.put("broker", "tcp://ict.xsjhwy.com:1883");
         //用户名
         jsonObject.put("username", "xsjhwy");
         //密码
