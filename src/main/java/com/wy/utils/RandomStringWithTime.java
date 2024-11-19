@@ -4,18 +4,19 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.wy.utils.DateUtil.getCurrentTime;
+
 public class RandomStringWithTime {
     private static final String CHARACTERS = "ABCDFGIJKMNZPQRSTUWLOVEHXYabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int TOTAL_LENGTH = 18; // 总长度
-    private static final String DATE_FORMAT = "yyyyMMddHHmmss"; // 时间格式
 
-   /* public static void main(String[] args) {
-        String randomStringWithTime = generateRandomStringWithTime();
-        System.out.println(randomStringWithTime);
+    /*public static void main(String[] args) {
+        String currentTime = getCurrentTime(DateUtil.FORMAT.TYPE_1);
+        System.out.println(currentTime);
     }*/
 
     public static String generateRandomStringWithTime() {
-        String currentTime = getCurrentTime();
+        String currentTime = getCurrentTime(DateUtil.FORMAT.TYPE_1);
         SecureRandom random = new SecureRandom();
 
         StringBuilder characters = new StringBuilder();
@@ -37,8 +38,4 @@ public class RandomStringWithTime {
         return randomString.toString();
     }
 
-    public static String getCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-        return sdf.format(new Date()); // 返回格式化后的当前时间
-    }
 }

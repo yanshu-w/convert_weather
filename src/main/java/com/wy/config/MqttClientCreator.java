@@ -23,7 +23,12 @@ public class MqttClientCreator {
         options.setUserName(username);
         options.setPassword(password.toCharArray());
         options.setConnectionTimeout(60);
+        //心跳机制
         options.setKeepAliveInterval(60);
+        //自动重连
+        options.setAutomaticReconnect(true);
+        //清除会话
+        options.setCleanSession(true);
         client.connect(options);
         return client;
     }
@@ -47,7 +52,7 @@ public class MqttClientCreator {
         clientMap.clear();
     }
 
-    public static Collection<MqttClient> allClient(){
+    public static Collection<MqttClient> allClient() {
         return clientMap.values();
     }
 

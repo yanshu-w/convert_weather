@@ -52,7 +52,6 @@ public class WeatherServer {
 
         List<String> resultList = new ArrayList<>();
 
-
         //校验mqtt的token；获取次数
         Integer apiTime = apiConfigService.checkToken(mqttParam.getToken());
 

@@ -11,10 +11,10 @@ import javax.annotation.Resource;
 
 @Configuration
 @Slf4j
-public class MqttConfig {
+public class MqttBeanConfig {
 
     @Resource
-    private CWeaMessageListener cWeaMessageListener;
+    private ReceiveMsgCallback receiveMsgCallback;
 
     @Value("${mqtt.broker}")
     private String broker;
@@ -36,7 +36,9 @@ public class MqttConfig {
 
         MqttClient client = MqttClientCreator.createMqttClient(broker, subscribeClientId, username, password);
 
-        client.subscribe(subscribeTopic, cWeaMessageListener);
+        client.subscribe(subscribeTopic);
+
+        client.setCallback(receiveMsgCallback);
 
         return client;
     }
