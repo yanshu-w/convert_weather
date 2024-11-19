@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.EOFException;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,8 @@ import java.util.Objects;
 @Component
 public class ReceiveMsgCallback implements MqttCallback {
 
+    @Resource
+    private MqttServerProperty mqttServerProperty;
 
     @Override
     public void connectionLost(Throwable cause) {
@@ -85,11 +88,12 @@ public class ReceiveMsgCallback implements MqttCallback {
             log.error("开始重连");
 
             MqttClient mqttClient = SpringUtil.getBean("subscribeMqttClient", MqttClient.class);
-            MqttConnectOptions options = MqttClientCreator.createOptions("xsjhwy", "xsjhwy123456*");
+            MqttConnectOptions options = MqttClientCreator.createOptions(mqttServerProperty.getUsername(),
+                    mqttServerProperty.getPassword());
 
             Thread.sleep(400L);
             mqttClient.connect(options);
-            mqttClient.subscribe("mqtt/cwea_wy_subscribe_topic_3");
+            mqttClient.subscribe(mqttServerProperty.getSubscribeTopic());
             MqttClientCreator.Reconnect.finish();
             log.error("重连成功");
         } catch (Throwable t) {

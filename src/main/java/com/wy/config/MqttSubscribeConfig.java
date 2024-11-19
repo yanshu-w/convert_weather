@@ -3,7 +3,6 @@ package com.wy.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,27 +15,17 @@ public class MqttSubscribeConfig {
     @Resource
     private ReceiveMsgCallback receiveMsgCallback;
 
-    @Value("${mqtt.broker}")
-    private String broker;
-
-    @Value("${mqtt.username}")
-    private String username;
-
-    @Value("${mqtt.password}")
-    private String password;
-
-    @Value("${mqtt.subscribe_clientId}")
-    private String subscribeClientId;
-
-    @Value("${mqtt.subscribe_topic}")
-    private String subscribeTopic;
+    @Resource
+    private MqttServerProperty mqttServerProperty;
 
     @Bean(name = "subscribeMqttClient")
     public MqttClient subscribeMqttClient() throws MqttException {
 
-        MqttClient client = MqttClientCreator.createMqttClient(broker, subscribeClientId, username, password);
+        MqttClient client = MqttClientCreator.createMqttClient(mqttServerProperty.getBroker(),
+                mqttServerProperty.getSubscribeClientId(), mqttServerProperty.getUsername(),
+                mqttServerProperty.getPassword());
 
-        client.subscribe(subscribeTopic);
+        client.subscribe(mqttServerProperty.getSubscribeTopic());
 
         client.setCallback(receiveMsgCallback);
 
