@@ -19,6 +19,14 @@ public class MqttClientCreator {
 
     public static MqttClient createMqttClient(String broker, String clientId, String username, String password) throws MqttException {
         MqttClient client = new MqttClient(broker, clientId, new MemoryPersistence());
+
+        MqttConnectOptions options = createOptions(username, password);
+
+        client.connect(options);
+        return client;
+    }
+
+    private static MqttConnectOptions createOptions(String username, String password) {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName(username);
         options.setPassword(password.toCharArray());
@@ -29,8 +37,7 @@ public class MqttClientCreator {
         options.setAutomaticReconnect(true);
         //清除会话
         options.setCleanSession(true);
-        client.connect(options);
-        return client;
+        return options;
     }
 
     public static MqttClient createMqttClient(MqttParam mqttParam) throws MqttException {
