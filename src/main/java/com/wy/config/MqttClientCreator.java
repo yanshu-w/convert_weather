@@ -1,6 +1,5 @@
 package com.wy.config;
 
-import cn.hutool.core.collection.ListUtil;
 import com.wy.domain.vo.MqttParam;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -26,7 +25,7 @@ public class MqttClientCreator {
         return client;
     }
 
-    private static MqttConnectOptions createOptions(String username, String password) {
+    public static MqttConnectOptions createOptions(String username, String password) {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName(username);
         options.setPassword(password.toCharArray());
@@ -41,10 +40,11 @@ public class MqttClientCreator {
     }
 
     public static MqttClient createMqttClient(MqttParam mqttParam) throws MqttException {
-        MqttClient mqttClient = createMqttClient(mqttParam.getBroker(), mqttParam.getToken(), mqttParam.getUsername()
-                , mqttParam.getPassword());
-        push(mqttParam.getBroker(), mqttClient);
-        return mqttClient;
+        MqttClient client = createMqttClient(mqttParam.getBroker(), mqttParam.getToken(), mqttParam.getUsername(),
+                mqttParam.getPassword());
+
+        push(mqttParam.getBroker(), client);
+        return client;
     }
 
     public static void push(String broker, MqttClient mqttClient) {
@@ -63,7 +63,6 @@ public class MqttClientCreator {
         return clientMap.values();
     }
 
-
     public static class ParamQueue {
 
         public static boolean add(MqttParam mqttParam) {
@@ -73,6 +72,23 @@ public class MqttClientCreator {
         public static MqttParam poll() {
             return mqttQueue.poll();
         }
+    }
+
+    public static class Reconnect {
+        private static boolean CONNECTING = false;
+
+        public static void start() {
+            CONNECTING = true;
+        }
+
+        public static void finish() {
+            CONNECTING = false;
+        }
+
+        public static Boolean running() {
+            return CONNECTING;
+        }
+
     }
 
 

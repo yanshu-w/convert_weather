@@ -6,7 +6,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class Reviser {
     public static void main(String[] args) {
         String broker = "tcp://ict.xsjhwy.com:1883";
-        String topic = "my_receive_topic";
+        String topic = "my_receive_topic_3";
         String username = "xsjhwy";
         String password = "xsjhwy123456*";
         String clientId = "subscribe_client";

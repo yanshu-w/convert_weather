@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 @Configuration
 @Slf4j
-public class MqttBeanConfig {
+public class MqttSubscribeConfig {
 
     @Resource
     private ReceiveMsgCallback receiveMsgCallback;

@@ -41,7 +41,7 @@ public class MqttPublishServer {
         message.setQos(0);
         // 发布消息
         mqttClient.publish(mqttParam.getNoticeTopic(), message);
-        log.info("publish success");
+        log.info("发送消息完成");
     }
 
 
