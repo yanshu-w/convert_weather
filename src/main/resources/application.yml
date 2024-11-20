@@ -10,9 +10,9 @@ mqtt:
   username: xsjhwy
   password: xsjhwy123456*
   #publish_clientId: cwea_wy_publish_id
-  subscribe_clientId: cwea_wy_subscribe_id
+  subscribe_clientId: cwea_wy_subscribe_id_3
   #publish_topic: mqtt/cwea_wy_publish_topic
-  subscribe_topic: mqtt/cwea_wy_subscribe_topic
+  subscribe_topic: mqtt/cwea_wy_subscribe_topic_3
   #ict.xsjhwy.com，端口1883
   #账号xsjhwy密码xsjhwy123456*
 

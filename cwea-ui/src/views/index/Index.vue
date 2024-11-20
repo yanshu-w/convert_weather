@@ -94,7 +94,7 @@
                             <el-input v-model="form.apiToken" disabled></el-input>
                         </el-form-item>
                         <el-form-item label="剩余次数">
-                            <el-input-number v-model="form.apiTime" :min="0" :max="100" />
+                            <el-input-number v-model="form.apiTime" :min="0" :max="100000" />
                         </el-form-item>
                     </el-form>
                     <template #footer>

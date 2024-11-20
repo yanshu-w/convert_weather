@@ -35,7 +35,7 @@ public class Sender {
         //经度
         jsonObject.put("lon", "102.6656");
         //接收的主题
-        jsonObject.put("noticeTopic", "my_receive_topic");
+        jsonObject.put("noticeTopic", "my_receive_topic_3");
         //接收的域名+端口
 //        jsonObject.put("broker", "0");
         jsonObject.put("broker", "tcp://ict.xsjhwy.com:1883");
@@ -49,7 +49,7 @@ public class Sender {
         options.setUserName(username);
         options.setPassword(password.toCharArray());
         client.connect(options);
-
+//        jsonObject = new JSONObject();
         MqttMessage message = new MqttMessage(jsonObject.toString().getBytes());
 
         message.setQos(0);
