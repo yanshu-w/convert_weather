@@ -8,13 +8,14 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 public class MqttClientCreator {
 
     private static final Map<String, MqttClient> clientMap = new ConcurrentHashMap<>();
 
-    private static final Queue<MqttParam> mqttQueue = new LinkedList<>();
+    private static final Queue<MqttParam> mqttQueue = new ConcurrentLinkedQueue<>();
 
     public static MqttClient createMqttClient(String broker, String clientId, String username, String password) throws MqttException {
         MqttClient client = new MqttClient(broker, clientId, new MemoryPersistence());
