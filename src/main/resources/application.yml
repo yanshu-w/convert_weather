@@ -5,28 +5,13 @@ logging:
     org.springframework: warn
 server:
   port: 5151
-mqtt:
-  broker: tcp://ict.xsjhwy.com:1883
-  username: xsjhwy
-  password: xsjhwy123456*
-  #publish_clientId: cwea_wy_publish_id
-  subscribe_clientId: cwea_wy_subscribe_id_3
-  #publish_topic: mqtt/cwea_wy_publish_topic
-  subscribe_topic: mqtt/cwea_wy_subscribe_topic_3
-  #ict.xsjhwy.com，端口1883
-  #账号xsjhwy密码xsjhwy123456*
-
-caiyun:
-  token: q3zW3FeZDKaiCGky
-  url: https://api.caiyunapp.com
-  version: v2.6
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   profiles:
-    active: druid
+    active: druid,mqtt
   sa-token:
     token-name: cwea_token
     allow-concurrent-login: false
