@@ -49,3 +49,4 @@ nbdist/
 /doc/~WRL0001.tmp
 /src/main/resources/application-druid.yml
 /src/main/resources/application-mqtt.yml
+/src/test/java/example/
