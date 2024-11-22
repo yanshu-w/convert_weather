@@ -47,3 +47,5 @@ nbdist/
 !*/build/*.xml
 /cwea-ui/node_modules/
 /doc/~WRL0001.tmp
+/src/main/resources/application-druid.yml
+/src/main/resources/application-mqtt.yml
